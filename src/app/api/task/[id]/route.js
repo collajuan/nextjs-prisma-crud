@@ -15,11 +15,14 @@ export function PUT(request, {params}) {
 }
 
 export async function DELETE(request, {params}) {
-    const taskRemoved = await prisma.task.delete({
-        where: {
-           id: Number(params.id) 
-        }
-    })
-
-    return NextResponse.json(taskRemoved)
+    try {
+        const taskRemoved = await prisma.task.delete({
+            where: {
+               id: Number(params.id) 
+            }
+        })
+        return NextResponse.json(taskRemoved)
+    } catch (error) {
+        return NextResponse.json(error.message)
+    }    
 }
