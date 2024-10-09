@@ -14,6 +14,12 @@ export function PUT(request, {params}) {
     return NextResponse.json('actualizando tarea ' + params.id)
 }
 
-export function DELETE(request, {params}) {
-    return NextResponse.json('eliminando tarea ' + params.id)
+export async function DELETE(request, {params}) {
+    const taskRemoved = await prisma.task.delete({
+        where: {
+           id: Number(params.id) 
+        }
+    })
+
+    return NextResponse.json(taskRemoved)
 }
