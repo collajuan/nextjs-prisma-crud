@@ -10,8 +10,16 @@ export async function GET(request, {params}) {
     return NextResponse.json(task)
 }
 
-export function PUT(request, {params}) {
-    return NextResponse.json('actualizando tarea ' + params.id)
+export async function PUT(request, {params}) {
+    const data = await request.json()
+
+    const taskUpdated = await prisma.task.update({
+        where: {
+            id: Number(params.id)
+        },
+        data:data
+    })
+    return NextResponse.json(taskUpdated)
 }
 
 export async function DELETE(request, {params}) {
