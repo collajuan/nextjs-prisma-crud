@@ -10,6 +10,8 @@ async function loadTasks() {
   return data;
 }
 
+export const dynamic = 'force-dynamic'
+
 async function HomePage() {
   const tasks = await loadTasks();
   return (
