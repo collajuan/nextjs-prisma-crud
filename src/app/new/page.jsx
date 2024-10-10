@@ -1,5 +1,9 @@
 "use client";
+import { useRouter } from "next/navigation";
+
 function NewPage() {
+  const router = useRouter()
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const title = e.target.title.value;
@@ -14,6 +18,8 @@ function NewPage() {
     });
     const data = await res.json();
     console.log(data);
+    
+    router.push('/')
   };
 
   return (
